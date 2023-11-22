@@ -61,7 +61,7 @@ const ContactsPage = (props) => {
                 });
                 setContactCard(contacts);
             } else {
-                console.log("\n\nNo Contacts\n\n")
+                console.log("\n\nNo Contactss\n\n")
             }
             
         }
