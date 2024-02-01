@@ -6,7 +6,7 @@ import { useState } from "react";
 
 export default function App() {
   const [user, setUser] = useState({});
-  const [loadAgain, setLoadAgain] = useState(true);
+  const [loadAgain, setLoadAgain] = useState(false);
 
   return (
     <NavigationContainer>

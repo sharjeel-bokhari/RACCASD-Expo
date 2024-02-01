@@ -1,7 +1,7 @@
-import { initializeApp, getReactNativePersistence } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, collection, addDoc, doc, setDoc, getDocs,getDoc} from "firebase/firestore";
+import { getAuth, initializeAuth,getReactNativePersistence,createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, collection, addDoc, doc, setDoc, getDocs,getDoc, updateDoc, deleteDoc} from "firebase/firestore";
 
 const firebaseConfig = {
     apiKey: "AIzaSyAZmkhB_kbPqkxe6nZCgV1hYNij7FyJZgc",
@@ -15,10 +15,11 @@ const firebaseConfig = {
 
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
+  // const auth = getAuth(app);
   // Use the below code to keep a user logged in 
     // the video: https://www.youtube.com/watch?v=GXlBvRmwwRQ find similar videos for this
-    // const auth = initializeAuth(app, {
-    //     persistence: getReactNativePersistence(ReactNativeAsyncStorage)
-    //   });
+    const auth = initializeAuth(app, {
+        persistence: getReactNativePersistence(ReactNativeAsyncStorage)
+      });
 
-export { app, db, getAuth, getFirestore, createUserWithEmailAndPassword, signInWithEmailAndPassword, collection, addDoc, doc, setDoc, getDoc, getDocs};
+export { app, db, auth, getFirestore, deleteDoc, createUserWithEmailAndPassword, updateDoc,signInWithEmailAndPassword, collection, addDoc, doc, setDoc, getDoc, getDocs};

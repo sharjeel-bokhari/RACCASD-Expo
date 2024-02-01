@@ -2,7 +2,7 @@ import {React, useState, useEffect, useContext} from "react";
 import { View, Text, StyleSheet, TextInput, ScrollView, ActivityIndicator, TouchableOpacity, Image, Modal, SafeAreaView, FlatList } from "react-native";
 import NavBar from "./navBar";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-import { db, collection, addDoc, doc, setDoc, getDoc, getDocs} from "../firebase/index";
+import { db, collection, addDoc, doc, setDoc, getDoc, updateDoc, getDocs} from "../firebase/index";
 import ContactCard from './ContactCard';
 import AppContext from "./AppContext";
 
@@ -15,6 +15,8 @@ const ContactsPage = (props) => {
     const [contactCard, setContactCard] = useState("");
 
     const {user,loadAgain,setLoadAgain} = useContext(AppContext);
+
+    
     const addContacts = async (userEmail, firstName, lastName, email, isFav) => {
         try {
           const userDocRef = doc(db, 'users', userEmail);
@@ -39,7 +41,6 @@ const ContactsPage = (props) => {
           setFirstName("")
           setLastName("");
           setIsFav(false);
-          
         } catch (e) {
           console.error('Error adding contact: ', e);
         }
@@ -69,11 +70,12 @@ const ContactsPage = (props) => {
             console.log("Error finding contacts:",e);
         }
     }
-        
 
     useEffect(() => {
         getContacts(user.email);
-    },[]);
+    },[
+        loadAgain
+    ]);
     // useEffect(() => {
     //     console.log("\n\n\n\nContactCard:\n\n",contactCard,"\n\n\n\n")
     //   }, [contactCard])
@@ -96,9 +98,9 @@ const ContactsPage = (props) => {
             </View>
             <View style={styles.body}>
                 <Modal 
-                visible={isAddContactVisible}
-                animationType='slide'
-                presentationStyle="pageSheet"
+                    visible={isAddContactVisible}
+                    animationType='slide'
+                    presentationStyle="pageSheet"
                 >
                     <View style={styles.modal}>
                         <SafeAreaView style={styles.modalHeader}>

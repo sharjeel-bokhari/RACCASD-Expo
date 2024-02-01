@@ -7,8 +7,8 @@ import AppContext from "./AppContext";
 
 const Favourites = (props) => {
     const [isFav, setIsFav] = useState([]);
-    const {user, loadAgain} = useContext(AppContext); //Get the userEmail from the Login page somehow and use it here and in contacts
-    console.log("\n\n\n\n\n",user,"\n\n\n\n")
+    const {user, loadAgain} = useContext(AppContext); //Get the userEmail from the Login page using context API and use it here and in contacts
+    // console.log("\n\n\n\n\n",user,"\n\n\n\n")
     const getFavs = async (userEmail) => {
         try {
             const querySnapshot = await getDocs(collection(db, "users", userEmail, "contacts"));
@@ -21,28 +21,23 @@ const Favourites = (props) => {
                             email: favData.Email,
                             favorites: favData.Favourites,
                         };
-                        
                     };
                 });
                 setIsFav(favs.filter(Boolean));
             } else {
                 console.log("\n\nNo Favouritess\n\n")
             }
-        } 
+        }
         catch (e) {
             console.log("Error Occurred:\n", e);
-       }
+        }
     }
 
     useEffect(()=>{
         getFavs(user.email);
-    },[
-        loadAgain
-    ])
+        console.log("Is fav",isFav)
+    },[loadAgain])
 
-    // useEffect(() => {
-    //     console.log("\n\n\n\nIsFav:\n\n",isFav,"\n\n\n\n")
-    //   }, [isFav])
     return (
         <View style={styles.container}>
             <View style={styles.header}>

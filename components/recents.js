@@ -47,14 +47,6 @@ const styles = StyleSheet.create ({
     body: {
         flex: 7,
     }, 
-    searchBar: {
-        borderRadius: 8,
-        backgroundColor: '#dddddf',
-        height: 36,
-        fontFamily: 'Times New Roman',
-        padding: 5,
-        fontSize: 16.4,
-    },
     contactNames: {
         
         borderBottomColor: "#dddddf",

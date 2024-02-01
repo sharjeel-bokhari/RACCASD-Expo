@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet,View,SafeAreaView,Text,Alert,TextInput,TouchableOpacity} from "react-native";
-import {app, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "../firebase/index"
+import {app, auth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "../firebase/index"
 import AppContext from "./AppContext";
+import { Feather } from '@expo/vector-icons';
 
 const Login = (props) => {
-    const auth = getAuth(app);
-    const [text, onChangeText] = React.useState("sharjeelhbokhari@gmail.com");
-    const [text2, onChangeText2] = React.useState("123456");
 
+    const [text, onChangeText] = useState("sharjeelhbokhari@gmail.com");
+    const [text2, onChangeText2] = useState("123456");
+    const [showPass, setShowPass] = useState(true)
     const {setUser} = useContext(AppContext);
+    
     return(
     <SafeAreaView style={styles.container}>
       <View>
@@ -21,19 +23,25 @@ const Login = (props) => {
           placeholder="Email"
           value={text}
         />
-        <TextInput
-          style={styles.input}
-          onChangeText={onChangeText2}
-          value={text2}
-          placeholder="Pin"
-          keyboardType="numeric"
-        />
+        <View style={styles.passView}>
+          <TextInput
+            style={styles.passInput}
+            onChangeText={onChangeText2}
+            value={text2}
+            placeholder="Password"
+            keyboardType='visible-password'
+            secureTextEntry={showPass}
+          />
+          <TouchableOpacity>
+            <Feather name={showPass ? "eye-off": "eye"} size={24} color="black" onPress={() => {setShowPass(!showPass)}} />
+          </TouchableOpacity>
+        </View>
         <View style={styles.fixToText}>
           <TouchableOpacity
             style={styles.loginScreenButton}
             title="Register"
-            onPress={() =>
-              createUserWithEmailAndPassword(auth, text, text2)
+            onPress={ async () =>
+              await createUserWithEmailAndPassword(auth, text, text2)
                 .then((userCredential) => {
                   // Registration Successful
                   console.log("\n\n\n\n\n\nLogin now");
@@ -53,7 +61,6 @@ const Login = (props) => {
                   if (error.code == "auth/invalid-email") {
                     Alert.alert("Please Enter a Valid Email");
                   }
-                  const errorMessage = error.message;
                 })
             }
           >
@@ -69,6 +76,7 @@ const Login = (props) => {
                     email: user.email,
                   }
                   setUser(payload);
+                  // console.log(user);
                   props.navigation.navigate("Home");
                 })
                 .catch((error) => {
@@ -102,7 +110,22 @@ const styles = StyleSheet.create({
       flexDirection: "column",
       justifyContent: "space-around",
     },
-
+    passView: {
+      flexDirection: 'row',
+      width: '95%',
+      marginHorizontal: 12,
+      height: 50,
+      borderRadius: 8,
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    },
+    passInput: {
+      width: '90%',
+      height: 50,
+      fontSize: 20,
+      fontWeight: '500'
+    },
     input: {
       height: 50,
       margin: 12,
@@ -110,7 +133,7 @@ const styles = StyleSheet.create({
       padding: 10,
       fontSize: 20,
       borderRadius: 8,
-
+      fontWeight: '500'
     },
     loginScreenButton: {
       height: 50,

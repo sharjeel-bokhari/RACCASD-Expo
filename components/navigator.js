@@ -6,6 +6,7 @@ import Recents from "./recents";
 import Splash from "../Screens/splash";
 import {Login} from "./Login";
 import ContactsPage from "./contacts";
+import Call from "./Call";
 
 
 const Root = createStackNavigator();
@@ -32,6 +33,10 @@ const Navigator = () => {
             <Root.Screen 
                 name="Recents"
                 component={Recents}
+            />
+            <Root.Screen 
+                name="Call"
+                component={Call}
             />
         </Root.Navigator>
     );

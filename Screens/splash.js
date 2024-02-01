@@ -1,5 +1,7 @@
 import { React, useEffect } from 'react';
+import { ActivityIndicator } from 'react-native';
 import {View, Text} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Splash = (props) => {
     useEffect(() => {
@@ -18,12 +20,9 @@ const Splash = (props) => {
 
     }, [])
     return(
-        <View>
-            <Text>
-                Splash
-            </Text>
-            
-       </View>
+        <SafeAreaView style={{flex:1, alignContent: 'center', justifyContent:"center"}}>
+            <ActivityIndicator size={'large'} color={'#000000'} />
+       </SafeAreaView>
     );
 };
 
