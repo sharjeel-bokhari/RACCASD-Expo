@@ -16,16 +16,43 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.sharjeelYasir.RACCASD-Expo"
+      "bundleIdentifier": "com.sharjeelYasir.RACCASD-Expo",
+      "bitcode": false
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.BLUETOOTH",
+        "android.permission.CAMERA",
+        "android.permission.INTERNET",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.WAKE_LOCK"
+      ],
+      "package": "com.sharjeelbokhari.RACCASDExpo"
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": [
+      "@config-plugins/react-native-webrtc"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "7a5baa3a-201e-4671-a772-0e561e61aa8a"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/7a5baa3a-201e-4671-a772-0e561e61aa8a"
+    },
+    "owner": "sharjeelbokhari"
   }
 }

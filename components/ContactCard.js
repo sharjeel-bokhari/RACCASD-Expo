@@ -4,9 +4,18 @@ import { MaterialIcons, Ionicons, FontAwesome } from '@expo/vector-icons';
 import AppContext from './AppContext';
 import { db, collection, getDocs, deleteDoc, doc, getDoc,setDoc} from "../firebase/index";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
-
+// import CallScreenNavigator from './CallScreenNavigator';
+import RoomScreen from "./RoomScreen";
+import JoinScreen from './JoinScreen';
+import CallScreen from './CallScreen';
 
 const ContactCard = ({name}) => {
+
+    const Screens = {
+        ROOM: "JOIN_ROOM",
+        CALL: "CALL",
+        JOIN: "JOIN",
+    };
     const [isCallingScreenVisible, setIsCallingScreenVisible] = useState(false);
     const [receiverEmail, setReceiverEmail] = useState([]);
     const [isMutePressed, setIsMutePressed] = useState(false);
@@ -16,6 +25,8 @@ const ContactCard = ({name}) => {
     const [lastName, setLastName] = useState("");
     const [email, setEmail] = useState("");
     const [contactInfo, setContactInfo] = useState({});
+    const [screen, setScreen] = useState(Screens.ROOM);
+    const [roomId, setRoomId] = useState("");
     
     const {user, loadAgain, setLoadAgain} = useContext(AppContext);
 
@@ -163,6 +174,7 @@ const ContactCard = ({name}) => {
                     setIsCallingScreenVisible(true);
                     getCaller(user.email);
                     setIsMutePressed(false);
+                    // navigation.navigate()
                 }}
             >
                 <Ionicons name="ios-call" size={24} color="black" style={{marginRight: 20}}/>
@@ -180,7 +192,7 @@ const ContactCard = ({name}) => {
                 animationType='fade'
                 presentationStyle="fullScreen"
                 >
-                    <SafeAreaView style={styles.modal}>
+                    {/* <SafeAreaView style={styles.modal}>
                         <View style={styles.callerId}>
                             <Text style={{fontSize: 35, fontWeight: '600', fontFamily: 'Times New Roman', alignSelf:'center'}}>
                                 {name}
@@ -213,7 +225,32 @@ const ContactCard = ({name}) => {
                             </TouchableOpacity>
                         </View>
                     </SafeAreaView>
-                    
+                     */}
+
+                    <SafeAreaView>
+                        {screen == Screens.ROOM ? 
+                            <RoomScreen 
+                                roomId={roomId}
+                                setRoomId={setRoomId}
+                                screens={Screens}
+                                setScreen={setScreen}
+                            />
+                        :
+                            (screen == Screens.CALL ? 
+                                <CallScreen 
+                                    roomId={roomId} 
+                                    screens={Screens} 
+                                    setScreen={setScreen}
+                                /> 
+                            : 
+                                <JoinScreen 
+                                    roomId={roomId} 
+                                    screens={Screens} 
+                                    setScreen={setScreen}
+                                />
+                            )
+                        }
+                    </SafeAreaView>
 
             </Modal>
             {/* This Modal is used to Update the contact */}
