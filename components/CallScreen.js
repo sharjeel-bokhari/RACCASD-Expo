@@ -82,8 +82,11 @@ const CallScreen = ({ roomId, screens, setScreen }) => {
       const localPC = new RTCPeerConnection(configuration);
       localStream.getTracks().forEach((track) => {
         localPC.addTrack(track, localStream);
-      })
-
+        // console.log(localStream);
+      }
+      )
+      console.log("\n\n\n LocalStream GEtAUdioTRracks \n\n\n", localStream.getAudioTracks()[0]);
+      
       const roomRef = doc(db, "room", id);
       const callerCandidatesCollection = collection(roomRef, "callerCandidates");
       const calleeCandidatesCollection = collection(roomRef, "calleeCandidates");
@@ -99,8 +102,10 @@ const CallScreen = ({ roomId, screens, setScreen }) => {
       localPC.ontrack = (e) => {
           const newStream = new MediaStream();
           e.streams[0].getTracks().forEach((track) => {
-            newStream.addTrack(newStream);
+            newStream.addTrack(track);
+            console.log("\n\n\n Track \n\n\n",track);
           });
+          console.log("\n\n\nStream\n\n\n", newStream);
           setRemoteStream(newStream);
       }
 
@@ -144,23 +149,31 @@ const CallScreen = ({ roomId, screens, setScreen }) => {
     return(
         <SafeAreaView>
             <View style={{flex: 1, backgroundColor: '#dc2626'}}>
+              <Text>
                 {!remoteStream && (
-                  <RTCView
-                    style={{flex:1}}
-                    streamURL={localStream && localStream.toURL()}
-                    objectFit={"cover"}
-                  />
-                )}
+                  // <RTCView
+                  //   style={{flex:1}}
+                  //   streamURL={localStream && localStream.toURL()}
+                  //   objectFit={"cover"}
+                  // />
+                  <View style={{flex:1}}>
 
+                  </View>
+                )}
+                </Text>
+                  <Text>
                 {remoteStream && (
                   <>
-                    <RTCView
+                    {/* <RTCView
                       style={{flex:1}}
                       streamURL={remoteStream && remoteStream.toURL()}
                       objectFit={"cover"}
-                    />
+                    /> */}
+                    <View style={{flex:1}}>
+                    
+                    </View>
                     (
-                      <RTCView
+                      {/* <RTCView
                         style={{
                           width: "8rem", 
                           height: "12rem", 
@@ -169,17 +182,27 @@ const CallScreen = ({ roomId, screens, setScreen }) => {
                           top: "2rem"
                         }}
                         streamURL={localStream && localStream.toURL()}
-                      />
+                      /> */}
+                      <View style={{
+                        width: "8rem", 
+                        height: "12rem", 
+                        position: "absolute",
+                        right: "1.5rem",
+                        top: "2rem"
+                      }}>
+                    
+                    </View>
                     )
                   </>
                 )}
+                </Text>
                 <View style={{position: "absolute", bottom: "0", width: '100%'}}>
                   <CallActionBox
                     toggleMute={toggleMute}
                     endCall={endCall}
                   />
                 </View>
-              </View>
+            </View>
         </SafeAreaView>
     );
 }

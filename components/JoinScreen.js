@@ -104,6 +104,7 @@ export default function JoinScreen({ roomId, screens, setScreen }) {
       const newStream = new MediaStream();
       e.streams[0].getTracks().forEach((track) => {
         newStream.addTrack(track);
+        console.log("\n\n\n JOINER TRACK \n\n\n",track);
       });
       setRemoteStream(newStream);
     };
@@ -149,24 +150,36 @@ export default function JoinScreen({ roomId, screens, setScreen }) {
 
   return (
     <View style={{flex: 1}}>
-      <RTCView
+      {/* <RTCView
         style={{flex: 1}}
         streamURL={remoteStream && remoteStream.toURL()}
         objectFit={"cover"}
-      />
-
+      /> */}
+       
+        <Text>
       {remoteStream && (
-        <RTCView
-        style={{
-            width: "8rem", 
-            height: "12rem", 
-            position: "absolute",
-            right: "1.5rem",
-            top: "2rem"
+        // <RTCView
+        // style={{
+        //     width: "8rem", 
+        //     height: "12rem", 
+        //     position: "absolute",
+        //     right: "1.5rem",
+        //     top: "2rem"
+        //   }}
+        //   streamURL={localStream && localStream.toURL()}
+        // />
+        <View 
+          style={{
+              width: "8rem", 
+              height: "12rem", 
+              position: "absolute",
+              right: "1.5rem",
+              top: "2rem"
           }}
-          streamURL={localStream && localStream.toURL()}
-        />
+        > 
+        </View>
       )}
+      </Text>
       <View style={{position: "absolute", bottom: "0", width: '100%'}}>
         <CallActionBox
           toggleMute={toggleMute}

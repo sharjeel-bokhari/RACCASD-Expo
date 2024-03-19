@@ -6,6 +6,7 @@ import { getFirestore, collection, addDoc, doc, setDoc, getDocs,getDoc, updateDo
 const firebaseConfig = {
     apiKey: "AIzaSyAZmkhB_kbPqkxe6nZCgV1hYNij7FyJZgc",
     authDomain: "raccasd-f554c.firebaseapp.com",
+    // databaseURL: "http://192.168.18.5:8081",
     projectId: "raccasd-f554c",
     storageBucket: "raccasd-f554c.appspot.com",
     messagingSenderId: "566656558904",

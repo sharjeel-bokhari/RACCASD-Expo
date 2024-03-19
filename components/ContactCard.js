@@ -174,7 +174,6 @@ const ContactCard = ({name}) => {
                     setIsCallingScreenVisible(true);
                     getCaller(user.email);
                     setIsMutePressed(false);
-                    // navigation.navigate()
                 }}
             >
                 <Ionicons name="ios-call" size={24} color="black" style={{marginRight: 20}}/>
@@ -227,7 +226,7 @@ const ContactCard = ({name}) => {
                     </SafeAreaView>
                      */}
 
-                    <SafeAreaView>
+                    <SafeAreaView style={styles.modal}>
                         {screen == Screens.ROOM ? 
                             <RoomScreen 
                                 roomId={roomId}
@@ -287,7 +286,8 @@ const ContactCard = ({name}) => {
                                 }}
                                 >
                                     <Text
-                                    style={{color: 'blue', fontSize: 16}}>
+                                        style={{color: 'blue', fontSize: 16}}
+                                    >
                                         Update
                                     </Text>
                                 </TouchableOpacity>
@@ -364,7 +364,6 @@ const styles = StyleSheet.create ({
     modalUpdateScreenBody:{
         flex: 9,
         justifyContent: 'flex-start',
-        // marginBottom: 20
     },
     inputModalUpdateScreen:{
         height: 50,
@@ -383,7 +382,7 @@ const styles = StyleSheet.create ({
 
     modal: {
         flex: 1,
-        flexDirection: "column"
+        flexDirection: "column",
     },
     modalBody: {
         flex: 2,

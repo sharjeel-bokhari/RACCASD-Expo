@@ -20,7 +20,7 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }) {
     }
   };
 
-  //generate random room id
+  //generating random room id
   useEffect(() => {
     const generateRandomId = () => {
       const characters = "abcdefghijklmnopqrstuvwxyz";
@@ -54,43 +54,45 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }) {
   return (
     <View>
       <Text style={{
-        fontSize: 24, // Changed from "1.5rem" to 24
+        fontSize: 24,
         fontWeight: "bold", 
         textAlign: "center"
-      }}>Enter Room ID:</Text>
+      }}>
+          Enter Room ID:
+        </Text>
       <TextInput
         style={{
             backgroundColor: '#fff',
             borderColor: '#38b2ac',
-            borderWidth: 2, // Changed from "2px" to 2
-            marginLeft: 20, // Changed from "1.25rem" to 20
-            marginRight: 20, // Changed from "1.25rem" to 20
-            marginTop: 12, // Changed from "0.75rem" to 12
-            marginBottom: 12, // Changed from "0.75rem" to 12
-            padding: 8, // Changed from "0.5rem" to 8
-            borderRadius: 6, // Changed from "0.375rem" to 6
+            borderWidth: 2,
+            marginLeft: 20,
+            marginRight: 20,
+            marginTop: 12,
+            marginBottom: 12,
+            padding: 8,
+            borderRadius: 6,
         }}
         value={roomId}
         onChangeText={setRoomId}
       />
       <View style={{
-        marginTop: 12, // Changed from "0.75rem" to 12
-        marginLeft: 20, // Changed from "1.25rem" to 20
-        marginRight: 20, // Changed from "1.25rem" to 20
-        marginTop: 8 // Changed from "0.5rem" to 8
+        marginTop: 12, 
+        marginLeft: 20,
+        marginRight: 20,
+        marginTop: 8
       }}>
         <TouchableOpacity
           style={{
             backgroundColor: '#60a5fa',
-            padding: 8, // Changed from "0.5rem" to 8
-            borderRadius: 6 // Changed from "0.375rem" to 6
+            padding: 8,
+            borderRadius: 6
           }}
           onPress={() => onCallOrJoin(screens.CALL)}
         >
           <Text style={{
             color: "#000",
             textAlign: "center", 
-            fontSize: 20, // Changed from "1.25rem" to 20
+            fontSize: 20,
             fontWeight: "bold"
           }}>
             Start meeting
@@ -99,16 +101,16 @@ export default function RoomScreen({ setScreen, screens, setRoomId, roomId }) {
         <TouchableOpacity
           style={{
             backgroundColor: '#60a5fa',
-            padding: 8, // Changed from "0.5rem" to 8
-            borderRadius: 6 // Changed from "0.375rem" to 6
+            padding: 8,
+            borderRadius: 6
           }}
           onPress={() => checkMeeting()}
         >
           <Text 
           style={{
             backgroundColor: '#60a5fa',
-            padding: 8, // Changed from "0.5rem" to 8
-            borderRadius: 6 // Changed from "0.375rem" to 6
+            padding: 8,
+            borderRadius: 6
           }}>
             Join meeting
           </Text>
